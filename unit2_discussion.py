@@ -1,3 +1,4 @@
+
 """
 ===========================================================
 UNIT 2 DISCUSSION: STACKS AND QUEUES (PYTHON)
@@ -18,53 +19,65 @@ class Stack:
     def __init__(self):
         # TODO (Student): Create the internal data structure for the stack.
         # Hint: A Python list can be used to store stack values.
-        pass
+        self.items = []
 
     def push(self, value):
         # TODO (Student): Add value to the stack.
         # Add a short comment explaining why this operation supports LIFO behavior.
-        pass
+        # New items go on top, so they will be removed first (LIFO).
+        self.items.append(value)
 
     def pop(self):
         # TODO (Student): Remove and return the most recently added value.
         # Improve or explain empty-stack handling.
         # What should happen if the stack is empty?
-        pass
+        if self.is_empty():
+            return None
+        return self.items.pop()
 
     def peek(self):
         # TODO (Student): Return the top value without removing it.
         # Add a comment explaining what peek does.
-        pass
+        # Peek lets us view the latest item without removing it.
+        if self.is_empty():
+            return None
+        return self.items[-1]
 
     def is_empty(self):
         # TODO (Student): Return True if the stack has no values.
-        pass
+        return len(self.items) == 0
 
 
 class Queue:
     def __init__(self):
         # TODO (Student): Create the internal data structure for the queue.
         # Hint: collections.deque is useful for efficient queue operations.
-        pass
+        self.items = deque()
 
     def enqueue(self, value):
         # TODO (Student): Add value to the back of the queue.
         # Add a short comment explaining why this operation supports FIFO behavior.
-        pass
+        # New tickets join the back and wait their turn (FIFO).
+        self.items.append(value)
 
     def dequeue(self):
         # TODO (Student): Remove and return the value from the front of the queue.
         # Explain or improve empty-queue handling.
-        pass
+        if self.is_empty():
+            return None
+        return self.items.popleft()
 
     def front(self):
         # TODO (Student): Return the front value without removing it.
         # Add a comment explaining what front returns.
-        pass
+        # Front shows the next ticket without removing it.
+        if self.is_empty():
+            return None
+        return self.items[0]
 
     def is_empty(self):
         # TODO (Student): Return True if the queue has no values.
-        pass
+        return len(self.items) == 0
 
 
 def main():
@@ -85,70 +98,85 @@ def main():
     # 7. Create a stack with only one item, remove it,
     #    and verify the stack is empty afterward.
 
+    print("\n=== STACK DEMO ===")
+    print("Scenario: Tracking support desk actions for undo.")
 
-print("\n=== STACK DEMO ===")
-print("TODO: Create a Stack object, demonstrate LIFO behavior,")
-print("      test popping from an empty stack,")
-print("      test peeking at an empty stack,")
-print("      and verify a single-item stack becomes empty after removal.")
+    stack = Stack()
 
-# ===============================
-# TODO (Student): QUEUE DEMO
-# ===============================
-# Requirements:
-# 1. Create a Queue object.
-# 2. Add at least 4 values to the queue.
-# 3. Improve the print statements so they clearly explain what is happening.
-# 4. Demonstrate FIFO behavior.
-# 5. Show what happens when dequeue() is used on an empty queue.
-#
-# Edge Cases:
-# 6. Show what happens when front() is used on an empty queue.
-# 7. Create a queue with only one item, remove it,
-#    and verify the queue is empty afterward.
+    actions = [
+        "Opened ticket",
+        "Assigned technician",
+        "Updated ticket status",
+        "Closed ticket"
+    ]
 
-print("\n=== QUEUE DEMO ===")
-print("TODO: Create a Queue object, demonstrate FIFO behavior,")
-print("      test dequeuing from an empty queue,")
-print("      test viewing the front of an empty queue,")
-print("      and verify a single-item queue becomes empty after removal.")
+    for action in actions:
+        stack.push(action)
+        print("Added action:", action)
+
+    print("\nMost recent action:", stack.peek())
+    print("Undoing actions in LIFO order:")
+
+    while not stack.is_empty():
+        print("Undo:", stack.pop())
+
+    print("\nTrying to pop an empty stack:", stack.pop())
+    print("Trying to peek at an empty stack:", stack.peek())
+
+    single_stack = Stack()
+    single_stack.push("One action")
+
+    print("\nSingle-item stack test:")
+    print("Removed:", single_stack.pop())
+    print("Is stack empty?", single_stack.is_empty())
+
+    # ===============================
+    # TODO (Student): QUEUE DEMO
+    # ===============================
+    # Requirements:
+    # 1. Create a Queue object.
+    # 2. Add at least 4 values to the queue.
+    # 3. Improve the print statements so they clearly explain what is happening.
+    # 4. Demonstrate FIFO behavior.
+    # 5. Show what happens when dequeue() is used on an empty queue.
+    #
+    # Edge Cases:
+    # 6. Show what happens when front() is used on an empty queue.
+    # 7. Create a queue with only one item, remove it,
+    #    and verify the queue is empty afterward.
+
+    print("\n=== QUEUE DEMO ===")
+    print("Scenario: Processing customer support tickets.")
+
+    queue = Queue()
+
+    tickets = [
+        "Ticket 101",
+        "Ticket 102",
+        "Ticket 103",
+        "Ticket 104"
+    ]
+
+    for ticket in tickets:
+        queue.enqueue(ticket)
+        print("Ticket received:", ticket)
+
+    print("\nNext ticket to process:", queue.front())
+    print("Processing tickets in FIFO order:")
+
+    while not queue.is_empty():
+        print("Processing:", queue.dequeue())
+
+    print("\nTrying to dequeue an empty queue:", queue.dequeue())
+    print("Trying to view the front of an empty queue:", queue.front())
+
+    single_queue = Queue()
+    single_queue.enqueue("Ticket 105")
+
+    print("\nSingle-item queue test:")
+    print("Processed:", single_queue.dequeue())
+    print("Is queue empty?", single_queue.is_empty())
+
 
 if __name__ == "__main__":
     main()
-# Unit 2 Discussion: Stacks and Queues
-
-## Project Overview
-
-For this assignment, I created a Python program that demonstrated how stacks and queues work. I used a customer support desk as my real-world example because it helped me understand how these two data structures handle information differently.
-
-## Stack Implementation
-
-I created a stack using a Python list. I implemented the push, pop, peek, and is_empty methods. The stack followed the Last-In, First-Out (LIFO) rule, meaning the most recently added item was removed first.
-
-I used the stack to represent a history of actions at a support desk. When an action was undone, the program removed the most recent action first.
-
-## Queue Implementation
-
-I created a queue using Python's collections.deque. I implemented the enqueue, dequeue, front, and is_empty methods.
-
-The queue followed the First-In, First-Out (FIFO) rule. I used customer support tickets to demonstrate how requests were processed in the order they arrived.
-
-## Edge Case Testing
-
-I tested what happened when the program attempted to remove an item from an empty stack or queue. I also tested viewing the top or front of an empty structure.
-
-The program returned None for these empty operations instead of crashing.
-
-I also created a stack and queue containing only one item. After removing that item, I checked that each structure was empty.
-
-## Memory Usage
-
-I learned that both stacks and queues used more memory as additional items were stored. Their overall space complexity was O(n), where n represented the number of stored items.
-
-## Lessons Learned
-
-This assignment helped me understand why the order of removing information matters. I also learned how to use Python lists and deques to manage information and how to handle empty structures without causing errors.
-
-## How to Run the Program
-
-I ran the Python file in IntelliJ IDEA using the Python plugin. The program displayed the stack and queue operations, including the LIFO and FIFO demonstrations and edge-case tests.
