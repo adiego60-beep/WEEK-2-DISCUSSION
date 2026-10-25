@@ -1,12 +1,43 @@
-For my Unit 2 assignment, I created a Python program using stacks and queues to show how information can be stored and removed in different ways.
+# Unit 2 Discussion: Stacks and Queues
 
-I decided to use a customer support desk as my example because I thought it was a good way to show how both structures could be used in the same situation. I used a stack to keep track of actions that could be undone and a queue to process customer tickets in the order they arrived.
+## Project Overview
 
-The biggest thing I learned was how LIFO and FIFO work. A stack uses Last-In, First-Out, meaning the newest item gets removed first, like using the undo button on a computer. A queue uses First-In, First-Out, meaning the oldest item gets handled first, like customers waiting in line.
+For this assignment, I created a Python program to demonstrate how stacks and queues work. I used a customer support desk as my real-world example because it helped me understand how both data structures organize information differently.
 
-One challenge was making sure the program handled empty stacks and queues without errors. I addressed this by checking whether they were empty before trying to remove anything.
+## Stack Implementation
 
-I also learned that both structures use more memory as more items are added, which is called O(n) space complexity.
+I created a stack using a Python list. I implemented the push, pop, peek, and is_empty methods.
 
-Overall, this assignment helped me better understand how choosing the right data structure can make a difference in how a program works.
+The stack followed Last-In, First-Out (LIFO), meaning the most recently added item was removed first. I used this structure to keep track of support desk actions that could be undone.
 
+I added four actions and removed them in reverse order to demonstrate LIFO behavior.
+
+## Queue Implementation
+
+I created a queue using Python's collections.deque. I implemented the enqueue, dequeue, front, and is_empty methods.
+
+The queue followed First-In, First-Out (FIFO), meaning the first item added was the first item removed.
+
+I used four customer support tickets to demonstrate how requests were processed in the order they arrived.
+
+## Edge Case Testing
+
+I tested what happened when I tried to remove an item from an empty stack or queue. I also tested viewing the top of an empty stack and the front of an empty queue.
+
+The program returned None instead of crashing.
+
+I also tested a stack and queue containing only one item. After removing the item, I verified that each structure was empty.
+
+## Memory Usage
+
+Both data structures used O(n) space because memory usage increased as more items were added.
+
+The Python list supported stack operations, while collections.deque allowed items to be added to the back and removed efficiently from the front of the queue.
+
+## Running the Program
+
+I ran the Python program in Visual Studio Code. I checked the output to confirm that the stack followed LIFO, the queue followed FIFO, and the empty-structure tests worked correctly.
+
+## Lessons Learned
+
+This assignment helped me understand why choosing the correct data structure matters. I learned how stacks and queues handle information differently and why checking for empty structures is important to prevent errors.
