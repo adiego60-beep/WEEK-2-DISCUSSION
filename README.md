@@ -10,4 +10,3 @@ I also learned that both structures use more memory as more items are added, whi
 
 Overall, this assignment helped me better understand how choosing the right data structure can make a difference in how a program works.
 
-**GitHub Repository:** [Paste your GitHub repository link here]
